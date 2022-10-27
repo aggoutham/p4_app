@@ -53,7 +53,7 @@ class SqlInjection extends React.Component {
 
     getTask1 = () => {
 
-        return (<div>Task 1.1 Contents</div>)
+        return (<div>Task 1.1 Contents {this.props}</div>)
     }
 
     getTask2 = () => {

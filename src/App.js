@@ -153,13 +153,13 @@ class App extends React.Component {
     if(this.state.loggedIn === true){
       auth_flow = (<div>
         <div className="divider"/>
-        <SqlInjection></SqlInjection>
+        <SqlInjection signedInUser={this.state.signedInUser}></SqlInjection>
         <div className="divider"/>
-        <SensitiveData></SensitiveData>
+        <SensitiveData signedInUser={this.state.signedInUser}></SensitiveData>
         <div className="divider"/>
-        <CrossSite></CrossSite>
+        <CrossSite signedInUser={this.state.signedInUser}></CrossSite>
         <div className="divider"/>
-        <RequestForgeries></RequestForgeries>
+        <RequestForgeries signedInUser={this.state.signedInUser}></RequestForgeries>
         <div className="divider"/>
       </div>)
     } else{
