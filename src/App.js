@@ -31,7 +31,8 @@ class App extends React.Component {
           body: JSON.stringify({ username: username, password: password }),
           mode: 'cors'
         };
-        fetch('http://127.0.0.1:5000/signup', requestOptions)
+        // fetch('http://127.0.0.1:5000/signup', requestOptions)
+        fetch('https://cse543-web-security.aplayerscreed.com/backend/signup', requestOptions)
           .then(response => response.json())
           .then((actualData) => {
             if("sign-up-status" in actualData){
@@ -62,13 +63,13 @@ class App extends React.Component {
                 <div className="container">  
                     <p>Student Sign Up</p>    
                     <label>Username : </label>   
-                    <input type="text" placeholder="Enter Your PSU User Alias" name="username" required/>  
+                    <input type="text" placeholder="Enter Your PSU User Alias" name="username" className='large-input-box' required/>  
                     {/* {renderErrorMessage("username")} */}
                     <label>Password : </label>   
-                    <input type="password" placeholder="Enter A Strong Password" name="password" required/>  
+                    <input type="password" placeholder="Enter A Strong Password" name="password" className='large-input-box' required/>  
                     {/* {renderErrorMessage("password")} */}
                     <label>Confirm Password : </label>   
-                    <input type="password" placeholder="Re-Enter Your Password" name="password1" required/>  
+                    <input type="password" placeholder="Re-Enter Your Password" name="password1" className='large-input-box' required/>  
                     {/* {renderErrorMessage("password1")} */}
                     <button type="submit">Sign Up</button>   
                 </div>   
@@ -98,7 +99,8 @@ class App extends React.Component {
           body: JSON.stringify({ username: username, password: password }),
           mode: 'cors'
         };
-        fetch('http://127.0.0.1:5000/login', requestOptions)
+        // fetch('http://127.0.0.1:5000/login', requestOptions)
+        fetch('https://cse543-web-security.aplayerscreed.com/backend/login', requestOptions)
         .then(response => response.json())
         .then((actualData) => {
           if("log-in-status" in actualData){
@@ -124,10 +126,10 @@ class App extends React.Component {
                 <div className="container">  
                     <p>Student Login Form</p>    
                     <label>Username : </label>   
-                    <input type="text" placeholder="Enter Username" name="username" required/>  
+                    <input type="text" placeholder="Enter Username" name="username" className='large-input-box' required/>  
                     {/* {renderErrorMessage("username")} */}
                     <label>Password : </label>   
-                    <input type="password" placeholder="Enter Password" name="password" required/>  
+                    <input type="password" placeholder="Enter Password" name="password" className='large-input-box' required/>  
                     {/* {renderErrorMessage("password")} */}
                     <button type="submit" name="login">Login</button>   
                     <div className="divider"/>

@@ -5,7 +5,7 @@ class SqlInjection extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {expand: false, t1: false, t2: false, t3: false, t4: false};
+        this.state = {expand: false, t1: false, t2: false, t3: false, t4: false, t1_answer: ""};
     }
 
     handleExpand = (event) => {
@@ -51,9 +51,38 @@ class SqlInjection extends React.Component {
         return;
     }
 
-    getTask1 = () => {
+    t1search = (event) => {
+        //Prevent page reload
+        event.preventDefault();
 
-        return (<div>Task 1.1 Contents {this.props}</div>)
+        var fname = event.target[0].value.toString();
+        var empId = event.target[1].value.toString();
+
+        alert(fname + " " + empId);
+    }
+
+    getTask1 = () => {
+        var answer = this.state.t1_answer
+        return (<div>
+            <p>There is a database that handles employee data in an organization. A website was designed for employees for viewing their own data in the company’s database.  
+            Assume that you are one of the employees from this company KAREN MATTHEWS. Employees can only read their own data once they enter their First Name and  
+            Employee ID in the following input boxes. Your employee Id is 8924.  
+             
+            You are curious to see the information (like salary, commission etc.) of your co-workers too. See if you can use this search feature to expose ALL employee data. </p>
+            <form  onSubmit={this.t1search}>  
+                <div className='question-container'>  
+                    <p>Employee Database</p>    
+                    <label>First Name : </label>   
+                    <input type="text" placeholder="Enter first name" name="fname" className='small-input-box' required/> 
+                    <div className="vertical-divider"/>
+                    <label>Employee ID : </label>   
+                    <input type="text" placeholder="Enter Emp ID" name="empID" className='small-input-box' required/>  
+                    <div className="vertical-divider"/>
+                    <button type="submit" name="employeeData">Search</button>   
+                </div>   
+            </form>  
+            {answer}
+            </div>)
     }
 
     getTask2 = () => {

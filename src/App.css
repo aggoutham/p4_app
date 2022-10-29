@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -48,7 +48,15 @@ button {
 form {   
    border: 3px solid #f1f1f1;   
 }   
-input[type=text], input[type=password] {   
+.small-input-box {   
+  width: 500px;   
+  margin: 8px 0;  
+  padding: 12px 20px;   
+  display: inline-block;   
+  border: 2px solid green;   
+  box-sizing: border-box;   
+} 
+.large-input-box {   
    width: 100%;   
    margin: 8px 0;  
    padding: 12px 20px;   
@@ -66,6 +74,11 @@ button:hover {
 }   
 .divider{
   width:20%;
+  height:auto;
+  display:inline-block;
+}
+.vertical-divider{
+  width:100%;
   height:auto;
   display:inline-block;
 }
@@ -143,3 +156,8 @@ button:hover {
   margin-left: auto;
   margin-right: 15px;
   } 
+
+.question-container{
+  padding: 7px;   
+
+  }
