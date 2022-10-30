@@ -13,6 +13,36 @@ class App extends React.Component {
     this.state = {loggedIn: false, signUpForm: false, signedInUser: ""};
   }
 
+  userExist = (event) => {
+    //Prevent page reload
+    event.preventDefault();
+
+    var username = document.getElementById("username-id").value.toString();
+    if(username){
+      //Check user finally
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': '*/*' },
+        body: JSON.stringify({ username: username }),
+        mode: 'cors'
+      };
+      // fetch('http://127.0.0.1:5000/signup', requestOptions)
+      fetch('https://cse543-web-security.aplayerscreed.com/backend/checkuser', requestOptions)
+        .then(response => response.json())
+        .then((actualData) => {
+          if("status" in actualData){
+            alert(actualData["status"])
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+         });
+
+
+    }
+
+  };
+
   handleSignUp = (event) => {
     //Prevent page reload
     event.preventDefault();
@@ -63,8 +93,12 @@ class App extends React.Component {
                 <div className="container">  
                     <p>Student Sign Up</p>    
                     <label>Username : </label>   
-                    <input type="text" placeholder="Enter Your PSU User Alias" name="username" className='large-input-box' required/>  
+                    <div className="vertical-divider"/>
+                    <input type="text" placeholder="Enter Your PSU User Alias" id="username-id" name="username" className='small-input-box' required/>  
+                    <div className="divider"/>
                     {/* {renderErrorMessage("username")} */}
+                    <button type="submit" name="exist" onClick={this.userExist}>Check If User Exists</button>   
+                    <div className="vertical-divider"/>
                     <label>Password : </label>   
                     <input type="password" placeholder="Enter A Strong Password" name="password" className='large-input-box' required/>  
                     {/* {renderErrorMessage("password")} */}
