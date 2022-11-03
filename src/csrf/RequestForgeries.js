@@ -5,7 +5,7 @@ class RequestForgeries extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {expand: false, t1: false, t2: false, t3: false, t4: false};
+        this.state = {expand: false, t1: false, t2: false, t3: false, t4: false, t1_answer: ""};
     }
 
     handleExpand = (event) => {
@@ -22,7 +22,7 @@ class RequestForgeries extends React.Component {
         if(this.state.t1 === false){
             this.setState({t1: true})
         }else{
-            this.setState({t1: false})
+            this.setState({t1: false, t1_answer: []})
         }
         return;
     }
@@ -51,9 +51,96 @@ class RequestForgeries extends React.Component {
         return;
     }
 
+    t1search = (event) => {
+        //Prevent page reload
+        event.preventDefault();
+        var email = event.target[0].value.toString();
+        var fname = event.target[1].value.toString();
+        var mobile = event.target[2].value.toString();
+
+        var data = new FormData();
+        data.append("username", this.props.signedInUser)
+        data.append("email", email);
+        data.append("fname", fname);
+        data.append("mobile", mobile);
+
+        const requestOptions = {
+            method: 'POST',
+            body: data,
+            mode: 'cors'
+        };
+        fetch('https://cse543-web-security.aplayerscreed.com/backend/tfourone', requestOptions)
+          .then(response => response.json())
+          .then((actualData) => {
+            console.log(actualData);
+        });
+
+        return;
+    }
+
+    t1searchprime = (event) => {
+        //Prevent page reload
+        event.preventDefault();
+
+        var secret_key = event.target[0].value.toString();
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username:this.props.signedInUser, secret_key: secret_key }),
+            mode: 'cors'
+          };
+          // fetch('http://127.0.0.1:5000/login', requestOptions)
+          fetch('https://cse543-web-security.aplayerscreed.com/backend/tfouroneprime', requestOptions)
+          .then(response => response.json())
+          .then((actualData) => {
+            if("status" in actualData){
+                this.setState({t1_answer: actualData["status"]})
+            }
+        })
+    }
+
     getTask1 = () => {
 
-        return (<div>Task 4.1 Contents</div>)
+        return (
+            <div>
+                <div className='vertical-divider'></div>
+
+                <p>Take a Clear Screenshot of the completed task. Add it to your report and explain in-detail how did you complete the task. </p>
+                
+                <form  onSubmit={this.t1search}>  
+                    <div className='question-container'>  
+                        <p>Register to Share your Data! (BEWARE... We take user data only with consent)</p>    
+                        <label>Email ID : </label>   
+                        <input type="text" placeholder="Enter valid email" name="email" className='small-input-box' required/> 
+                        <div className="vertical-divider"/>
+                        <label>First Name : </label>   
+                        <input type="text" placeholder="Enter first name" name="fname" className='small-input-box' required/> 
+                        <div className="vertical-divider"/>
+                        <label>Mobile Number : </label>   
+                        <input type="text" placeholder="Enter phone number" name="mobile" className='small-input-box' required/> 
+                        <div className="vertical-divider"/>
+                        <button type="submit" name="dataForm">Register!</button>   
+                    </div>   
+                </form>  
+
+
+                <div className='vertical-divider'></div>
+                <p>Once you successfully finish the above task, you will receive a Secret Key. Enter the Secret Key below - </p>
+                <div className='vertical-divider'></div>
+
+                <form  onSubmit={this.t1searchprime}>  
+                    <div className='question-container'>    
+                        <label>Secret Key : </label>   
+                        <input type="text" placeholder="Enter secret key" name="key" className='small-input-box' required/> 
+                        <div className="vertical-divider"/>
+                        <button type="submit" name="checkform">Check!</button>   
+                    </div>   
+                </form>  
+                <p>{this.state.t1_answer}</p>
+            </div>
+
+        );
     }
 
     getTask2 = () => {
