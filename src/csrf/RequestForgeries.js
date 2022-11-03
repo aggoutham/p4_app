@@ -104,6 +104,24 @@ class RequestForgeries extends React.Component {
 
         return (
             <div>
+                <p>Cross-site request forgery (also known as CSRF) attacks are a consequence of certain web vulnerabilities 
+                that helps attackers induce certain malicious actions by innocent users who do not intend to perform those 
+                operations in the first place. Primarily, this occurs when a Client blindly trusts any Web Page they visit. </p>
+
+                <p>This is a good read for understanding CSRF attacks :- https://portswigger.net/web-security/csrf</p>
+
+                <p>Let’s assume there is a website (A) that asks users for permissions to user their data with proper consent. 
+                There is a form that explicitly asks users to exhibit this consent. However, the user signed in (YOU) doesn’t 
+                want to register. There is an attacker (also YOU) who wants the benign user to be registered anyways. So the 
+                attacker builds another malicious web page (B) that has some malicious “submit” button in it. When the user clicks on the 
+                submit button in a different website (B), they get registered in the first website (A) without their consent.</p>
+
+                <p>In this task, you need to implement that simple web page (an index.html static page) which has a button. </p>
+
+                <p>If you are able to successfully generate a request from a different website, 
+                you will receive a Secret Key using which you can finish this task.  </p>
+
+                <p>NOTE :- You need to submit this index.html file as part of your final submission tar.</p>
                 <div className='vertical-divider'></div>
 
                 <p>Take a Clear Screenshot of the completed task. Add it to your report and explain in-detail how did you complete the task. </p>
