@@ -202,7 +202,7 @@ class CrossSite extends React.Component {
                     <button name="expand" onClick={this.handleT2} className="task-button">Toggle</button>
                     {t2}
                 </div>
-                <div className="divider"/>
+                {/* <div className="divider"/>
                 <div className='task-container'>
                     <p className='task-title'>Task 3.3</p>
                     <button name="expand" onClick={this.handleT3} className="task-button">Toggle</button>
@@ -213,7 +213,7 @@ class CrossSite extends React.Component {
                     <p className='task-title'>Task 3.4</p>
                     <button name="expand" onClick={this.handleT4} className="task-button">Toggle</button>
                     {t4}
-                </div>
+                </div> */}
                 <div className="divider"/>
             </div>);
             toggle = (<button name="collapse" onClick={this.handleCollapse}>Collapse</button> )

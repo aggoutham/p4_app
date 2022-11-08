@@ -96,7 +96,7 @@ class SensitiveData extends React.Component {
                     <button name="expand" onClick={this.handleT1} className="task-button">Toggle</button>
                     {t1}
                 </div>
-                <div className="divider"/>
+                {/* <div className="divider"/>
                 <div className='task-container'>
                     <p className='task-title'>Task 2.2</p>
                     <button name="expand" onClick={this.handleT2} className="task-button">Toggle</button>
@@ -113,7 +113,7 @@ class SensitiveData extends React.Component {
                     <p className='task-title'>Task 2.4</p>
                     <button name="expand" onClick={this.handleT4} className="task-button">Toggle</button>
                     {t4}
-                </div>
+                </div> */}
                 <div className="divider"/>
             </div>);
             toggle = (<button name="collapse" onClick={this.handleCollapse}>Collapse</button> )
