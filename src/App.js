@@ -5,6 +5,7 @@ import RequestForgeries from './csrf/RequestForgeries';
 import SensitiveData from './sensitivedata/SensitiveData';
 import SqlInjection from './sqlinjection/SqlInjection';
 import CrossSite from './xss/CrossSite';
+import Cookies from 'universal-cookie';
 
 class App extends React.Component {
 
@@ -140,6 +141,9 @@ class App extends React.Component {
           if("log-in-status" in actualData){
             if(actualData["log-in-status"] === "SUCCESS"){
               this.setState({loggedIn: true, signUpForm: false, signedInUser: username})
+              const cookies = new Cookies();
+              cookies.set('mysession', username, { path: '/' });
+              cookies.set('mysession1', username, { path: '/' });
             }
             else{
               alert("Log in failed! Try Again.")

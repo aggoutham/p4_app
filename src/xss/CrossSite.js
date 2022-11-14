@@ -4,9 +4,10 @@ import React, { Component } from 'react';
 class CrossSite extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {expand: false, t1: false, t2: false, t3: false, t4: false, t1_answer: ""};
+        this.state = {expand: false, t1: false, t2: false, t3: false, t4: false, t1_answer: "", t2_answer: ""};
     }
 
+    // Not used anymore
     simulateXSS = (userInput) => {
         var final = ""
         var inputScript = ""
@@ -31,7 +32,7 @@ class CrossSite extends React.Component {
         if(trigger===1){
             final = script_premise.replace('$$$', inputScript);
         } else{
-            final = userInput
+            final = ""
         }
         return final;
 
@@ -59,7 +60,7 @@ class CrossSite extends React.Component {
         if(this.state.t2 === false){
             this.setState({t2: true})
         }else{
-            this.setState({t2: false})
+            this.setState({t2: false, t2_answer: ""})
         }
         return;
     }
@@ -91,8 +92,17 @@ class CrossSite extends React.Component {
         var street = event.target[5].value.toString();
         // var mobile = event.target[6].value.toString();
 
-        var final = this.simulateXSS(street);
+        // var final = this.simulateXSS(street);
+        var final = street;
         this.setState({t1_answer: final});
+
+        return;
+    }
+
+    t2search = (event) => {
+        //Prevent page reload
+        event.preventDefault();
+        this.setState({t2_answer: event.target[0].value.toString()});
 
         return;
     }
@@ -152,13 +162,50 @@ class CrossSite extends React.Component {
                     <button type="submit" name="eventForm">Register!</button>   
                 </div>   
             </form>  
-            <div dangerouslySetInnerHTML={{__html: answer}} />
+            <div dangerouslySetInnerHTML={{__html: answer}} hidden/>
             </div>)
     }
 
     getTask2 = () => {
+        var answer = this.state.t2_answer;
 
-        return (<div>Task 3.2 Contents</div>)
+        return (<div>
+            <p>The idea of Cross-Site Scripting attack relies on the inability of a web server to differentiate what user inputs are benign 
+                and what other user inputs are malicious. If a web server accepts some input text from users and then later displays the same 
+                to all other users in the applications, then there is a potential chance that an attacker’s unwanted script can be rendered 
+                in the interface of another innocent user.  </p>
+
+            <p>These injected scripts could do more harm than simply redirecting users to different websites. They could steal sensitive 
+                information from benign users including session cookies, usernames, personally identifiable data etc. In this task, you 
+                have to design a malicious input that is accepted by the web server through a text box that is actually designed for taking 
+                in User feedback for some business application. This malicious input should steal all cookies from the user session and send 
+                it to an attacker controlled web API in a parameter named "cookies". </p>
+
+            <p>Details of the Attacker controlled API :- </p>
+
+            <p>url - https://cse543-web-security.aplayerscreed.com/backend/tthreetwo</p>
+
+            <p>method - GET</p>
+
+            <p>Enter your answer in the text and hit Submit. If your script does exactly what it intends, then you will receive a success message in the 
+                corresponding network call that can be analysed in your browser's Network section. However, In a real world example, your input will appear
+                on other user’s webpages too that helps you steal all their cookies. </p>
+
+            <div className='vertical-divider'></div>
+
+            <p>Take a Clear Screenshot of the completed task. Add it to your report and explain in-detail how did you complete the task. </p>
+            
+            <form  onSubmit={this.t2search}>  
+                <div className='question-container'>  
+                    <label>We appreciate any user feedback : </label>   
+                    <div className='vertical-divider'></div>
+                    <textarea name="text" rows="14" cols="10" wrap="soft" className='large-text-box' required> </textarea>
+                    <div className="vertical-divider"/>
+                    <button type="submit" name="eventForm">Submit!</button>   
+                </div>   
+            </form>  
+            <div dangerouslySetInnerHTML={{__html: answer}} hidden/>
+            </div>)
     }
 
     getTask3 = () => {
@@ -192,13 +239,13 @@ class CrossSite extends React.Component {
             expand_tasks = (<div>
                 <div className="divider"/>
                 <div className='task-container'>
-                    <p className='task-title'>Task 3.1</p>
+                    <p className='task-title'>Task 3.1 (30 points)</p>
                     <button name="expand" onClick={this.handleT1} className="task-button">Toggle</button>
                     {t1}
                 </div>
                 <div className="divider"/>
                 <div className='task-container'>
-                    <p className='task-title'>Task 3.2</p>
+                    <p className='task-title'>Task 3.2 (60 points)</p>
                     <button name="expand" onClick={this.handleT2} className="task-button">Toggle</button>
                     {t2}
                 </div>
@@ -225,7 +272,7 @@ class CrossSite extends React.Component {
         return(
             <div className='section-container'>
                 <p className='section-title'>
-                    3. XSS Cross Site Scripting Tasks
+                    3. XSS Cross Site Scripting Tasks (90 pts Total)
                 </p>
                 {toggle}
                 {expand_tasks}

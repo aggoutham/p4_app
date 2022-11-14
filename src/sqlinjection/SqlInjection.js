@@ -289,25 +289,25 @@ class SqlInjection extends React.Component {
             expand_tasks = (<div>
                 <div className="divider"/>
                 <div className='task-container'>
-                    <p className='task-title'>Task 1.1</p>
+                    <p className='task-title'>Task 1.1 (20 points)</p>
                     <button name="expand" onClick={this.handleT1} className="task-button">Toggle</button>
                     {t1}
                 </div>
                 <div className="divider"/>
                 <div className='task-container'>
-                    <p className='task-title'>Task 1.2</p>
+                    <p className='task-title'>Task 1.2 (30 points)</p>
                     <button name="expand" onClick={this.handleT2} className="task-button">Toggle</button>
                     {t2}
                 </div>
                 <div className="divider"/>
                 <div className='task-container'>
-                    <p className='task-title'>Task 1.3</p>
+                    <p className='task-title'>Task 1.3 (50 points)</p>
                     <button name="expand" onClick={this.handleT3} className="task-button">Toggle</button>
                     {t3}
                 </div>
                 <div className="divider"/>
                 <div className='task-container'>
-                    <p className='task-title'>Task 1.4</p>
+                    <p className='task-title'>Task 1.4 (70 points)</p>
                     <button name="expand" onClick={this.handleT4} className="task-button">Toggle</button>
                     {t4}
                 </div>
@@ -322,7 +322,7 @@ class SqlInjection extends React.Component {
         return(
             <div className='section-container'>
                 <p className='section-title'>
-                    1. SQL Injection Tasks
+                    1. SQL Injection Tasks (170 pts Total)
                 </p>
                 {toggle}
                 {expand_tasks}

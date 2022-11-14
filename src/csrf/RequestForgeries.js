@@ -297,13 +297,13 @@ class RequestForgeries extends React.Component {
             expand_tasks = (<div>
                 <div className="divider"/>
                 <div className='task-container'>
-                    <p className='task-title'>Task 4.1</p>
+                    <p className='task-title'>Task 4.1  (30 points)</p>
                     <button name="expand" onClick={this.handleT1} className="task-button">Toggle</button>
                     {t1}
                 </div>
                 <div className="divider"/>
                 <div className='task-container'>
-                    <p className='task-title'>Task 4.2</p>
+                    <p className='task-title'>Task 4.2  (60 points)</p>
                     <button name="expand" onClick={this.handleT2} className="task-button">Toggle</button>
                     {t2}
                 </div>
@@ -330,7 +330,7 @@ class RequestForgeries extends React.Component {
         return(
             <div className='section-container'>
                 <p className='section-title'>
-                    4. CSRF Request Forgery Tasks
+                    4. CSRF Request Forgery Tasks (90 pts Total)
                 </p>
                 {toggle}
                 {expand_tasks}

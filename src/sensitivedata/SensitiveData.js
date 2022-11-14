@@ -5,7 +5,7 @@ class SensitiveData extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {expand: false, t1: false, t2: false, t3: false, t4: false};
+        this.state = {expand: false, t1: false, t2: false, t3: false, t4: false, t1_answer: ""};
     }
 
     handleExpand = (event) => {
@@ -22,7 +22,7 @@ class SensitiveData extends React.Component {
         if(this.state.t1 === false){
             this.setState({t1: true})
         }else{
-            this.setState({t1: false})
+            this.setState({t1: false, t1_answer: ""})
         }
         return;
     }
@@ -51,9 +51,70 @@ class SensitiveData extends React.Component {
         return;
     }
 
+    t1searchinitial = (event) => {
+        //Prevent page reload
+        event.preventDefault();
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({  username: "test", password: "PlainTextPasswordsAreVeryRisky" }),
+            mode: 'cors'
+          };
+          // fetch('http://127.0.0.1:5000/login', requestOptions)
+          fetch('https://cse543-web-security.aplayerscreed.com/backend/ttwoone', requestOptions)
+          .then(response => response.json())
+          .then((actualData) => {
+            return;
+        })
+    }
+
+    t1search = (event) => {
+        //Prevent page reload
+        event.preventDefault();
+
+        var password = event.target[0].value.toString();
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ signedInUser:this.props.signedInUser, password: password, username: "test" }),
+            mode: 'cors'
+          };
+          // fetch('http://127.0.0.1:5000/login', requestOptions)
+          fetch('https://cse543-web-security.aplayerscreed.com/backend/ttwooneprime', requestOptions)
+          .then(response => response.json())
+          .then((actualData) => {
+            if("status" in actualData){
+                this.setState({t1_answer: actualData["status"]})
+            }
+        })
+    }
+
     getTask1 = () => {
 
-        return (<div>Task 2.1 Contents</div>)
+        var answer = this.state.t1_answer;
+        return (<div>
+                <div className='vertical-divider'></div>
+                <p>Take a Clear Screenshot of the completed task. Add it to your report and explain in-detail how did you complete the task. </p>
+                <form  onSubmit={this.t1searchinitial}>  
+                    <div className='question-container'>  
+                        <button type="submit" name="testUser">Login</button>   
+                    </div>   
+                </form>  
+                <div className='vertical-divider'></div>
+                <p>Once you successfully finish the above task, you will receive the "test" user's password. Enter that password below to complete the task - </p>
+                <div className='vertical-divider'></div>
+                <form  onSubmit={this.t1search}>  
+                    <div className='question-container'>  
+                        <p>Enter the Password of "test" user :-</p>    
+                        <input type="text" placeholder="Enter password" name="testPass" className='small-input-box' required/> 
+                        <div className="vertical-divider"/>
+                        <button type="submit" name="testUser">Check</button>   
+                    </div>   
+                </form>  
+                <p>{answer}</p>
+                </div>)
     }
 
     getTask2 = () => {
@@ -92,7 +153,7 @@ class SensitiveData extends React.Component {
             expand_tasks = (<div>
                 <div className="divider"/>
                 <div className='task-container'>
-                    <p className='task-title'>Task 2.1</p>
+                    <p className='task-title'>Task 2.1 (20 points)</p>
                     <button name="expand" onClick={this.handleT1} className="task-button">Toggle</button>
                     {t1}
                 </div>
@@ -125,7 +186,7 @@ class SensitiveData extends React.Component {
         return(
             <div className='section-container'>
                 <p className='section-title'>
-                    2. Sensitive Data Exposure Tasks
+                    2. Sensitive Data Exposure Tasks (20 pts Total)
                 </p>
                 {toggle}
                 {expand_tasks}

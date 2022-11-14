@@ -64,6 +64,18 @@ form {
    border: 2px solid green;   
    box-sizing: border-box;   
 }  
+.large-text-box {   
+  width: 50%;   
+  height: 200px;
+  margin: 8px 0;  
+  padding: 12px 20px;   
+  display: inline-block;   
+  border: 2px solid green;   
+  box-sizing: border-box;   
+  text-align: left;
+  vertical-align: text-top;
+  word-wrap: break-word;
+}  
 button:hover {   
    opacity: 0.7;   
 }   
