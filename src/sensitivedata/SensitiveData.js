@@ -95,6 +95,10 @@ class SensitiveData extends React.Component {
 
         var answer = this.state.t1_answer;
         return (<div>
+                <p>Let’s assume that there is a website in which a test user is trying to Login with their credentials. 
+                    This button mocks the behavior of the benign user trying to do so. As an attacker, try to see if you 
+                    can guess the test user’s password. Explain in your report how did you find it ? Explain how this could 
+                    be a potential risk in a real public website and state a mitigation technique to overcome this vulnerability.</p>
                 <div className='vertical-divider'></div>
                 <p>Take a Clear Screenshot of the completed task. Add it to your report and explain in-detail how did you complete the task. </p>
                 <form  onSubmit={this.t1searchinitial}>  
